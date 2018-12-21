@@ -34,7 +34,7 @@ export class CartComponent implements OnInit {
 
   async ngOnInit() {
     const bikes = JSON.parse(localStorage.getItem('bikes'));
-    if ( bikes && bikes.length > 0) {
+    if (bikes && bikes.length > 0) {
       this.bikes = bikes;
     } else {
       this.bikes = await this.loadCartFromJSON()
@@ -70,7 +70,7 @@ export class CartComponent implements OnInit {
       case 'Bike3':
         this.bikes.unshift({
           "id": 3,
-          "image":"../../assets/bike3.jpe",
+          "image": "../../assets/bike3.jpe",
           "description": "Bike Model 3",
           "price": 3000,
           "quantity": 1
@@ -89,24 +89,29 @@ export class CartComponent implements OnInit {
     this.toastService.showToast('success', 2000, 'Saved.')
   }
 
-  validate(name: string, total: number, taxAmount: number, subTotal: number){
-    if (!total){
-    }
-  }
+
   calculateTotal() {
-    const total = this.bikes.reduce((acc: number, item: IBike) =>{
+    if (this.nameParams == null || this.nameParams === '') {
+      this.toastService.showToast('warning', 2000, 'Name must be defined!')
+    } else if (this.nameParams.indexOf(', ') === -1) {
+      this.toastService.showToast('warning', 2000, 'Name must have a comma!');
+    } else
+    const total = this.bikes.reduce((acc: number, item: IBike) => {
       acc += item.quantity * item.price;
       return acc;
     }, 0);
     const taxAmount = total * .15;
     const subTotal = total - taxAmount;
     const grandTotal = subTotal + taxAmount;
+    let firstName, lastName, indexOfComma, fullName;
+    firstName = this.nameParams.slice(indexOfComma + 1, this.nameParams.length);
+    lastName = this.nameParams.slice(0, indexOfComma);
+    fullName = firstName +''+ lastName;
     this.router.navigate(['invoice', {
-      name, taxAmount, subTotal, grandTotal}
+      fullName, taxAmount, subTotal, grandTotal
+    }
     ])
     console.log('total is', total);
-    
-   
 
 
 
@@ -117,4 +122,6 @@ export class CartComponent implements OnInit {
 
 
 
-}
+
+
+  }
