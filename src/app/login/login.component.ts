@@ -34,21 +34,8 @@ export class LoginComponent implements OnInit {
       } else {
         this.toastService.showToast('danger', 15000, 'Login failed! Please check your username or password!');
       }
+    }
 
-    // login(user: IUser){
-    //   const defaultUser = { username: 'eric', password: 'eric123' };
-    //   if (user.username != null && user.password != null && user.username !== '' && user.password!== '') {
-    //     this.router.navigate(['cart', user]);
-    //   } 
-    //   if (user.username === defaultUser.username && user.password === defaultUser.password) {
-    //     localStorage.setItem('cart', JSON.stringify(user));
-    //     this.router.navigate(['cart', user]);
-    //   } else {
-    //     this.toastService.showToast('danger', 2000, 'Please check your username or password!');
-    //   }
-    // } 
+    }
 
-
-
-
-  }
+  

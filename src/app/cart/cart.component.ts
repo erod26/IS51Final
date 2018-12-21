@@ -108,7 +108,10 @@ export class CartComponent implements OnInit {
     lastName = this.nameParams.slice(0, indexOfComma);
     fullName = firstName +''+ lastName;
     this.router.navigate(['invoice', {
-      fullName, taxAmount, subTotal, grandTotal
+      fullName: fullName, 
+      taxAmount: taxAmount, 
+      subTotal: subTotal, 
+      grandTotal: grandTotal,
     }
     ])
     console.log('total is', total);
