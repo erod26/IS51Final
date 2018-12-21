@@ -7,10 +7,14 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  data: object = {};
   constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-
+    this.activatedRoute.params.subscribe((data) => {
+      this.data = data;
+      console.log('data', data)
+    });
   }
 
 }
